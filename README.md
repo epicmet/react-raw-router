@@ -10,3 +10,6 @@ Just a basic react app with a router implemented from scratch.
 ```
 
 2. Change and define your own components and routes in `src/Router.tsx`.
+
+## References
+This [article](https://jamesknelson.com/routing-with-raw-react/) Helped me out.
