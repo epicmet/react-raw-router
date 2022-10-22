@@ -1,5 +1,5 @@
-import { createContext, FC, useCallback, useContext, useEffect, useState } from "react";
-import { removeHash } from "./utils";
+import { createContext, FC, MouseEventHandler, useCallback, useContext, useEffect, useState } from "react";
+import { navigateTo, removeHash } from "./utils";
 
 interface IRouterContext {
   route: string;
@@ -36,8 +36,35 @@ export const RouterProvider: FC<RouterProps> = ({ children, router }) => {
   );
 };
 
-// TODO:
-// Link and Redirect componenet
+export interface ILink {
+  to: string;
+  children?: React.ReactNode;
+}
+
+export const Link: FC<ILink> = ({ children, to }) => {
+  const handleClick: MouseEventHandler = (event) => {
+    event.preventDefault();
+
+    navigateTo(to);
+  };
+
+  return (
+    <a onClick={handleClick}>{ children }</a>
+  )
+};
+
+export interface IRedirect {
+  to: string;
+}
+
+export const Redirect: FC<IRedirect> = ({ to }) => {
+  useEffect(() => {
+    navigateTo(to);
+  }, []);
+
+  return <></>;
+};
+
 
 export const useRouter = () => {
   return useContext(RouterContext);
